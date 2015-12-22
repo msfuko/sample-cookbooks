@@ -12,12 +12,14 @@ node[:deploy].each do |app_name, deploy_config|
         code <<-EOH
                 rpm -ivh "#{app_root}/#{app_name}*"
         EOH
-        notifies :start, "service[#{app_name}]", :delayed
+        notifies :start, "service[rpm]", :delayed
   end
   
   # start
-  service '#{app_name}' do
+  service rpm do
+        service_name '#{app_name}'
         action :nothing
   end
+  
 end
 
