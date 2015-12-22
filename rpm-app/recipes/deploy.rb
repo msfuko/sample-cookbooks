@@ -4,7 +4,7 @@ node[:deploy].each do |app_name, deploy_config|
   # determine root folder of new app deployment
   app_root = "#{deploy_config[:deploy_to]}/current"
 
- # install & start 
+  # install
   bash 'deploy-rpm' do
         user deploy_config[:user]
         code <<-EOH
@@ -12,4 +12,10 @@ node[:deploy].each do |app_name, deploy_config|
         EOH
         notifies :start, "service[#{node['rpm']['serviceName']}]", :delayed
   end
+  
+  # start
+  service '#{deploy_config[:app_name]}' do
+        action :nothing
+  end
 end
+
