@@ -20,7 +20,7 @@ node[:deploy].each do |application, deploy|
 
   # install
   bash 'deploy-rpm' do
-        user deploy[:user]
+        user 'root'
         code <<-EOH
                 rpm -ivh "#{app_root}/archive"
         EOH
