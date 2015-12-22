@@ -16,7 +16,7 @@ node[:deploy].each do |app_name, deploy_config|
   end
   
   # start
-  service rpm do
+  service 'rpm' do
         service_name '#{app_name}'
         action :nothing
   end
