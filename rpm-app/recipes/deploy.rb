@@ -20,9 +20,10 @@ node[:deploy].each do |application, deploy|
 
   # install
   bash 'deploy-rpm' do
+        cwd '#{app_root}'
         user deploy[:user]
         code <<-EOH
-                rpm -ivh "#{app_root}/#{application}*"
+                rpm -ivh archive
         EOH
         notifies :start, "service[rpm]", :delayed
   end
