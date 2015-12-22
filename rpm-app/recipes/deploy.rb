@@ -6,7 +6,7 @@ node[:deploy].each do |app_name, deploy_config|
 
  # install & start 
   bash 'deploy-rpm' do
-        owner deploy_config[:user]
+        user deploy_config[:user]
         code <<-EOH
                 rpm -ivh "#{app_root}/#{deploy[:application]}*"
         EOH
